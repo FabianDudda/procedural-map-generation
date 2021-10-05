@@ -1,2 +1,2 @@
-# procedural-map-generation
+# Procedural Map Generation
 2D Tilemap Generator

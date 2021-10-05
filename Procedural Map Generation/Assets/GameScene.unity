@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefabs:
   - {fileID: 8746712343475166493, guid: 8b87ae5d9eb9e4c47a9908bece0f0f7d, type: 3}
+  - {fileID: 4790963376926495813, guid: a65aab8913d92874694ecb698bdd54c8, type: 3}
 --- !u!4 &3269335
 Transform:
   m_ObjectHideFlags: 0
@@ -1096,8 +1097,9 @@ MonoBehaviour:
   TileHolder: {fileID: 493554959}
   plantPrefabs:
   - {fileID: 8746712343475166493, guid: 8b87ae5d9eb9e4c47a9908bece0f0f7d, type: 3}
-  MapXSize: 100
-  MapYSize: 100
+  - {fileID: 4790963376926495813, guid: a65aab8913d92874694ecb698bdd54c8, type: 3}
+  MapXSize: 25
+  MapYSize: 25
   scale: 1
   offset: {x: 0, y: 0}
   heightWaves:

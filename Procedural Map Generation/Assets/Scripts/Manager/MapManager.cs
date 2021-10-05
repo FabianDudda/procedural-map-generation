@@ -14,8 +14,8 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private GameObject[] plantPrefabs; // Reference for an array of the plantPrefabs.  0 = tree,  1 = bush
 
     [Header("Dimensions")]
-    public int MapXSize = 100;
-    public int MapYSize = 100;
+    public int MapXSize;
+    public int MapYSize;
     public float scale = 1.0f;
     public Vector2 offset;
 
@@ -113,14 +113,13 @@ public class MapManager : Singleton<MapManager>
 
     void GenerateObjects()
     {
-        int counter = 0;
-
-        while (counter < 10)
+        int treeCounter = 0;
+        while (treeCounter < 15)
         {
             Point randomGridPosition = new Point(UnityEngine.Random.Range(0, MapXSize), UnityEngine.Random.Range(0, MapYSize)); // Creates a randomGridPosition (x,y) [x= between 0 and MapXSize; y= between 0 and MapYSize].
             TileScript tileScript    = TilesDictionary[randomGridPosition];                                                     // Get TileScript under randomGridPosition.
 
-            if (tileScript.IsEmpty == true)
+            if (tileScript.IsEmpty == true && tileScript.VegetationPossible == true)
             {
                 int sortingLayer    = 100 + tileScript.GridPosition.X - tileScript.GridPosition.Y;  // Set sortingLayer [Lowest Grid row will be rendered above higher Grid row].
 
@@ -129,9 +128,26 @@ public class MapManager : Singleton<MapManager>
                 Tree.Setup(sortingLayer, randomGridPosition);                                       // Execute Setup() in the  TreeScript.
             }
 
-            Debug.Log(counter);
-            counter++;
+            treeCounter++;
         }
+
+        int bushCounter = 0;
+        while (bushCounter < 15) {
+            Point randomGridPosition = new Point(UnityEngine.Random.Range(0, MapXSize), UnityEngine.Random.Range(0, MapYSize)); // Creates a randomGridPosition (x,y) [x= between 0 and MapXSize; y= between 0 and MapYSize].
+            TileScript tileScript = TilesDictionary[randomGridPosition];                                                     // Get TileScript under randomGridPosition.
+
+            if (tileScript.IsEmpty == true && tileScript.VegetationPossible == true) {
+                int sortingLayer = 100 + tileScript.GridPosition.X - tileScript.GridPosition.Y;  // Set sortingLayer [Lowest Grid row will be rendered above higher Grid row].
+
+                GameObject BushGO = ObjectPool.Instance.Pool.GetObject(plantPrefabs[1].name);     // Instantiate a TreeGO out of the Object Pool.
+                TreeScript Bush = BushGO.GetComponent<TreeScript>();                            // Get the TreeScript of the TreeGO.
+                Bush.Setup(sortingLayer, randomGridPosition);                                       // Execute Setup() in the  TreeScript.
+            }
+
+            bushCounter++;
+        }
+
+
     }
 }
 
